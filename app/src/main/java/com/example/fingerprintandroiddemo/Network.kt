@@ -10,7 +10,7 @@ class Network {
          */
         fun getRetrofitInstance() : BioPassIDApi {
             return Retrofit.Builder()
-                .baseUrl("https://api.biopassid.com/")
+                .baseUrl("https://api2.biopassid.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(BioPassIDApi::class.java)
