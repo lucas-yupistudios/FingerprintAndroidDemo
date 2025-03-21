@@ -25,13 +25,7 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    private val readPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        android.Manifest.permission.READ_MEDIA_IMAGES
-    } else {
-        android.Manifest.permission.READ_EXTERNAL_STORAGE
-    }
     private val writePermission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-    private var readPermissionGranted = false
     private var writePermissionGranted = false
     private lateinit var permissionsLauncher: ActivityResultLauncher<Array<String>>
 
@@ -225,23 +219,15 @@ class MainActivity : AppCompatActivity() {
 
     // Helper method used to request permissions
     private fun updateOrRequestPermissions() {
-        val hasReadPermission = ContextCompat.checkSelfPermission(
-            this,
-            readPermission
-        ) == PackageManager.PERMISSION_GRANTED
         val hasWritePermission = ContextCompat.checkSelfPermission(
             this,
             writePermission
         ) == PackageManager.PERMISSION_GRANTED
         val isMinSdk29 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
-        readPermissionGranted = hasReadPermission
         writePermissionGranted = hasWritePermission || isMinSdk29
 
         val permissionsToRequest = mutableListOf<String>()
-        if (!readPermissionGranted) {
-            permissionsToRequest.add(readPermission)
-        }
         if (!writePermissionGranted) {
             permissionsToRequest.add(writePermission)
         }
