@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
         permissionsLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-                readPermissionGranted = permissions[readPermission] ?: readPermissionGranted
                 writePermissionGranted = permissions[writePermission] ?: writePermissionGranted
             }
         updateOrRequestPermissions()
